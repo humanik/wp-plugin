@@ -10,13 +10,12 @@ use Yiisoft\Factory\Exceptions\NotInstantiableException;
 use Yiisoft\Injector\Injector;
 
 class Plugin {
-	protected array $features;
 	protected string $filepath;
 	protected Container $container;
 
 	public function __construct( string $filepath ) {
 		$this->filepath = $filepath;
-		$this->container = new Container( $this->container_config() );
+		$this->container = new Container( $this->dependencies() );
 	}
 
 	public function register(): void {
@@ -28,21 +27,18 @@ class Plugin {
 			/** @var Feature $feature */
 			$feature = $this->get( $class );
 			$feature->register();
-			$this->features[] = $feature;
 		}
+	}
+
+	protected function dependencies(): array {
+		return [ Plugin::class => $this ];
 	}
 
 	protected function features(): array {
 		return array_filter(
-			$this->container_config(),
+			$this->dependencies(),
 			fn( $definition ) => is_string( $definition ) && is_a( $definition, Feature::class, true )
 		);
-	}
-
-	protected function container_config(): array {
-		return [
-			Plugin::class => $this
-		];
 	}
 
 	/**

@@ -15,17 +15,17 @@ abstract class Feature {
 
 	public function __construct( Plugin $plugin, array $config = [] ) {
 		$this->plugin = $plugin;
-		$this->config = array_merge( $config, $this->default_config() );
+		$this->config = array_merge( $this->default_config(), $config );
 	}
 
 	abstract public function register();
 
-	public function get_setting( string $name ) {
-		return ArrayHelper::getValueByPath( $this->config, $name );
-	}
-
 	protected function default_config(): array {
 		return [];
+	}
+
+	public function get_setting( string $name ) {
+		return ArrayHelper::getValueByPath( $this->config, $name );
 	}
 
 	/**
