@@ -10,6 +10,7 @@
     }
   },
   "require": {
-    "yiisoft/arrays": "3.0.x-dev"
+    "yiisoft/arrays": "3.0.x-dev",
+    "yiisoft/di": "3.0.x-dev"
   }
 }
