@@ -1,0 +1,15 @@
+{
+  "name": "humanik/wp-plugin",
+  "description": "WordPress plugin helpers",
+  "type": "library",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Humanik\\WordPress\\": "src"
+    }
+  },
+  "require": {
+    "yiisoft/arrays": "3.0.x-dev"
+  }
+}
